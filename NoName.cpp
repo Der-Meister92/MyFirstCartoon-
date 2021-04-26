@@ -418,9 +418,7 @@ void Scena3 ()
 
         SolncaSvet (time);
         Obloka (time);
-
         Rybak (200, 210, 0 + (time / 100) % 2, 1);
-        MadamBokDraw (660 - time * 2, 500 - time / 3, 0, 0, 0 + (time / 20) % 2, 1 - (time / 20) % 2, 1.5, -1);
 
         int y = 480;
         for (int x = 40; x < 450; x += 120)
@@ -435,6 +433,7 @@ void Scena3 ()
         CatDraw (720 - time * 2, 570 - time / 3, 0.75, 1 + (time / 20 / 3) % 2,
                  0 +((time + 2) / 5 / 3) % 2, 0 + ((time + 1) / 10 / 3) % 2, 0 + (time / 15) % 2,
                  0 + (time / 20) % 2, 0);
+        MadamBokDraw (660 - time * 2, 500 - time / 3, 0, 0, 0 + (time / 20) % 2, 1 - (time / 20) % 2, 1.5, -1);
 
         txSleep (Sl);
         }
@@ -481,7 +480,8 @@ void Scena3 ()
 
         if (time > 250)
             {
-            BusRDraw (1200 + (time - 250) * 4, 600, 0, TX_DARKGRAY, 0, 0, 0 + ((time - 250) / 3) % 10, 1.5, 0, 0);
+            BusRDraw (1200 + (time - 250) * 6, 600, 1, TX_DARKGRAY, 0 + ((time / 20) % 4) * 2,
+                      0 + (time / 20) % 4, 0 + (time / 3) % 10, 1.5, 0, 0);
             }
 
         txSetColor (TX_MYBROWN, 2);
