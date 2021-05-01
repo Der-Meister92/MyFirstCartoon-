@@ -1,17 +1,17 @@
-//{===================================================================
+//{========================================================
 //! @file   NoName.cpp
 //!
-//! @brief  Cartoon "No name"
+//! @brief  Мультфильм "No name"
 //!
-//!         An example of creating a cartoon using the library TXLib.h
+//!         Пример создания мультфильма с помощью TXLib.h
 //!
-//      (c) Romanovskaia Anna Aleksandrovna, g. Omsk, 2021
-//}===================================================================
+//      (c) Романовская Анна Александровна, г. Омск, 2021
+//}========================================================
 
 #include "TXLib.h"
 #include "DerMeisterLib.h"
 
-const int SleepTime = 1;
+const int Sl = 1;
 
 void TitlesBegin ();
 void Scena1 ();
@@ -57,8 +57,7 @@ void TitlesBegin ()
             txSelectFont ("Arial", 105, 52);
             txTextOut (430, 300, "presents");
             }
-
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
     txEnd ();
     }
@@ -66,7 +65,7 @@ void TitlesBegin ()
 void Scena1 ()
     {
     txBegin ();
-    txPlaySound ("Soundtrack/Bus.wav");
+    txPlaySound ("Bus.wav");
 
     for (int time = 0; time < 320; time++)
         {
@@ -75,15 +74,22 @@ void Scena1 ()
         Background ();
 
         ZadniiPlan (time);
-        JuravleiKosyak (-180, 50, time);
-        Lesopolosa (time/2);
-        RazmetkaDraw (510, time * 4);
 
+        for (int x = -1400; x <= 2800; x += 120)
+            {
+            CvetokDraw (-1460 + x * 2 + time / 2, 260,    1, TX_WHITE, TX_ORANGE);
+            DerevoDraw (-1400 + x * 2 + time / 2, 120, 1.25, 1);
+            DerevoDraw (-1520 + x * 2 + time / 2, 170, 1.5, -1);
+            CvetokDraw (-1580 + x * 2 + time / 2, 290,    1, TX_WHITE, TX_ORANGE);
+            CvetokDraw (-1660 + x * 2 + time / 2, 335, 1.25, TX_ORANGE, TX_WHITE);
+            }
+
+        RazmetkaDraw (time * 4, 510);
         BusLDraw (1400 - time * 6, 450, 1, TX_DARKGRAY, 0 + ((time / 20) % 4) * 2,
                   0 + (time / 20) % 4, 0 + (time % 15) * 2, 1.25);
         SemerkaDraw (-1000 + time * 20, 570);
 
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
 
     for (int time = 0; time < 340; time++)
@@ -92,8 +98,16 @@ void Scena1 ()
         txClear ();
         BackgroundSize ();
 
-        LesopolosaSize (time * -1);
-        RazmetkaDraw (480, time * -4);
+        for (int x = -1400; x <= 2800; x += 140)
+            {
+            CvetokDraw (-1460 + x * 2 - time,  260,    1, TX_WHITE, TX_ORANGE);
+            DerevoDraw (-1400 + x * 2 - time, -150,  1.5,  1);
+            DerevoDraw (-1520 + x * 2 - time,  -50,    2, -1);
+            CvetokDraw (-1580 + x * 2 - time,  260,    1, TX_WHITE, TX_ORANGE);
+            CvetokDraw (-1660 + x * 2 - time,  200, 1.25, TX_ORANGE, TX_WHITE);
+            }
+
+        RazmetkaDraw (time * -4, 480);
 
         if (time <= 100)
             {
@@ -102,7 +116,7 @@ void Scena1 ()
             MadamBokDraw  (1309 - time * 4, 300, 0 + (time / 20) % 2, 1 - (time / 20) % 2, 0, 0, 1, 1);
             }
 
-        if (100 < time && time <= 150)
+        if (100 < time && time <= 150 )
             {
             MoskvichDraw  (1400 - time * 4, 400, -60, 0, 0, (time / 15) % 2, 1);
             MisterBokDraw (1376 - time * 4, 320, 0, 0, 1);
@@ -110,7 +124,7 @@ void Scena1 ()
             Serdechko     (1342 - time * 4, 310 - (time - 100) * 2, 0.1 + (time - 100) / 20);
             }
 
-        if (150 < time && time <= 200)
+        if (150 < time && time <=200)
             {
             MoskvichDraw  (1400 - time * 4, 400, 0, 0, 0, (time / 15) % 2, 1);
             }
@@ -123,7 +137,7 @@ void Scena1 ()
         BusRDraw (0 + time * 6, 550, 1, TX_DARKGRAY, 0 + ((time / 20) % 4) * 2,
                   0 + (time / 20) % 4, 0 + (time / 3) % 10, 1.5, 0, 0);
 
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
 
     for (int time = 0; time < 200; time++)
@@ -133,26 +147,42 @@ void Scena1 ()
         Background ();
 
         ZadniiPlan (time + 319);
-        JuravleiKosyak (-180, 50, time + 319);
 
         if (time <= 100)
             {
-            Lesopolosa (time);
+            for (int x = -1400; x <= 2800; x += 120)
+                {
+                CvetokDraw (-1460 + x * 2 + time, 260,    1, TX_WHITE, TX_ORANGE);
+                DerevoDraw (-1400 + x * 2 + time, 120, 1.25, 1);
+                DerevoDraw (-1520 + x * 2 + time, 170, 1.5, -1);
+                CvetokDraw (-1580 + x * 2 + time, 290,    1, TX_WHITE, TX_ORANGE);
+                CvetokDraw (-1660 + x * 2 + time, 335, 1.25, TX_ORANGE, TX_WHITE);
+                }
+
             OstanovkaDraw (-40 + time, 370, 1);
-            RazmetkaDraw (510, time * 4);
+            RazmetkaDraw (time * 4, 510);
             BusLDraw (1400 - time * 7, 450, 1, TX_DARKGRAY, 0 + ((time / 20) % 4) * 2,
                       0 + (time / 20) % 4, 0 + (time % 15) * 2, 1.25);
             }
+
         else
             {
-            Lesopolosa (100 + (time - 100) / 2);
+            for (int x = -1400; x <= 2800; x += 120)
+                {
+                CvetokDraw (-1360 + x * 2 + (time - 100) / 2, 260,    1, TX_WHITE, TX_ORANGE);
+                DerevoDraw (-1300 + x * 2 + (time - 100) / 2, 120, 1.25, 1);
+                DerevoDraw (-1420 + x * 2 + (time - 100) / 2, 170, 1.5, -1);
+                CvetokDraw (-1480 + x * 2 + (time - 100) / 2, 290,    1, TX_WHITE, TX_ORANGE);
+                CvetokDraw (-1560 + x * 2 + (time - 100) / 2, 335, 1.25, TX_ORANGE, TX_WHITE);
+                }
+
             OstanovkaDraw (60 + (time - 100) / 2, 370, 1);
-            RazmetkaDraw (510, (time + 400) * 2);
+            RazmetkaDraw ((time + 400) * 2, 510);
             BusLDraw (700 - (time - 100) * 4, 450, 1, TX_DARKGRAY, 0 + ((time / 20) % 4) * 2,
                       0 + (time / 20) % 4, 0 + (time % 15) * 2, 1.25);
             }
 
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
 
     for (int time = 0; time < 100; time++)
@@ -161,14 +191,23 @@ void Scena1 ()
         txClear ();
         BackgroundSize ();
 
-        LesopolosaSize (0);
-        RazmetkaDraw (480, 0);
+        for (int x = -1400; x <= 2800; x += 140)
+            {
+            CvetokDraw (-1460 + x * 2, 260,    1, TX_WHITE, TX_ORANGE);
+            DerevoDraw (-1400 + x * 2, -150, 1.5,  1);
+            DerevoDraw (-1520 + x * 2,  -50,   2, -1);
+            CvetokDraw (-1580 + x * 2, 260,    1, TX_WHITE, TX_ORANGE);
+            CvetokDraw (-1660 + x * 2, 200, 1.25, TX_ORANGE, TX_WHITE);
+            }
+
+        RazmetkaDraw (0, 480);
 
         if (time <= 50)
             {
             BusRDraw (1000 + time * 4, 600, 1, TX_DARKGRAY, 0 + ((time / 20) % 4) * 2,
                           0 + (time / 20) % 4, 0 + (time % 15) * 2, 1.5, 0, 0);
             }
+
         else
             {
             BusRDraw (1200, 600, 0, TX_DARKGRAY, 0, 0, 0, 1.5, 0, 0);
@@ -179,7 +218,7 @@ void Scena1 ()
         txRectangle (1100, 450, 1400, 510);
         txRectangle (1140, 510, 1400, 700);
 
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
 
     txPlaySound (NULL);
@@ -189,7 +228,7 @@ void Scena1 ()
 void Scena2 ()
     {
     txBegin ();
-    txPlaySound ("Soundtrack/Dveri.wav");
+    txPlaySound ("Dveri.wav");
 
     for (int time = 0; time < 250; time++)
         {
@@ -197,8 +236,16 @@ void Scena2 ()
         txClear ();
         BackgroundSize ();
 
-        LesopolosaSize (0);
-        RazmetkaDraw (480, 0);
+        for (int x = -1400; x <= 2800; x += 140)
+            {
+            CvetokDraw (-1460 + x * 2,  260,    1, TX_WHITE, TX_ORANGE);
+            DerevoDraw (-1400 + x * 2, -150,  1.5,  1);
+            DerevoDraw (-1520 + x * 2,  -50,    2, -1);
+            CvetokDraw (-1580 + x * 2,  260,    1, TX_WHITE, TX_ORANGE);
+            CvetokDraw (-1660 + x * 2,  200, 1.25, TX_ORANGE, TX_WHITE);
+            }
+
+        RazmetkaDraw (0, 480);
 
         if (time <= 50)
             {
@@ -232,11 +279,11 @@ void Scena2 ()
         txRectangle (1100, 450, 1400, 510);
         txRectangle (1140, 510, 1400, 700);
 
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
 
     txPlaySound (NULL);
-    txPlaySound ("Soundtrack/Sea.wav");
+    txPlaySound ("Sea.wav");
 
     for (int time = 0; time < 300; time++)
         {
@@ -247,6 +294,7 @@ void Scena2 ()
             {
             BackgroundMore (720, 400, 1 + (time / 2) %40);
             }
+
         else
             {
             BackgroundMore (720, 400, 40 - (time / 2) % 40);
@@ -256,7 +304,7 @@ void Scena2 ()
         MadamDraw (1100 - time / 2, 180 + time, 2, TX_BLUE, 1, 0, 0, 0 + (time / 20) % 2,
                    1 - (time / 20) % 2, 1, 1, 1.1 + 0.002 * time);
 
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
 
     for (int time = 0; time <= 1100; time ++)
@@ -268,20 +316,20 @@ void Scena2 ()
             {
             BackgroundBeach (1 + (time / 2) %40);
             }
+
         else
             {
             BackgroundBeach (40 - (time / 2) % 40);
             }
 
         ZadniiPlan (time);
-        JuravleiKosyak (-180, 50, time);
 
-        if (time <= 200)
+        if (time <= 100)
             {
-            Rybak (0 + time, 210, 1, 1);
+            Rybak (0 + time * 2, 210, 1, 1);
             }
 
-        if (time > 200)
+        if (time > 100)
             {
             Rybak (200, 210, 0 + (time / 100) % 2, 1);
             }
@@ -296,7 +344,15 @@ void Scena2 ()
             MadamZadDraw (660, 500, 0, 0, 0, 0, 1.5);
             }
 
-        MnogoTravi (480, time);
+        int y = 480;
+        for (int x = 40; x < 450; x += 120)
+            {
+            Trava (x, y, 0 + time / 80 % 2, 1);
+            Trava (1400 - x, y, 0 + time / 80 % 2, 1);
+            Trava (x + 60, y + 80, 0 + time / 80 % 2, 1);
+            Trava (1400 - x - 60, y + 80, 0 + time / 80 % 2, 1);
+            y += 40;
+            }
 
         if (400 < time && time <= 740)
             {
@@ -324,7 +380,7 @@ void Scena2 ()
                         0 + ((time + 1) / 10 / 3) % 2, 0 + (time / 30) % 2);
             }
 
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
 
     txPlaySound (NULL);
@@ -335,15 +391,15 @@ void Scena3 ()
     {
     txBegin ();
 
-    for (int time = 0; time <= 75; time++)
+    for (int time = 0; time <= 100; time++)
         {
         txSetFillColor (TX_WHITE);
         txClear ();
 
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
 
-    txPlaySound ("Soundtrack/End.wav");
+    txPlaySound ("End.wav");
 
     for (int time = 0; time <= 400; time ++)
         {
@@ -354,23 +410,32 @@ void Scena3 ()
             {
             BackgroundBeach (1 + (time / 2) %40);
             }
+
         else
             {
             BackgroundBeach (40 - (time / 2) % 40);
             }
 
-        ZadniiPlan (time);
-
+        SolncaSvet (time);
+        Obloka (time);
         Rybak (200, 210, 0 + (time / 100) % 2, 1);
-        MadamBokDraw (660 - time * 2, 500 - time / 3, 0, 0, 0 + (time / 20) % 2, 1 - (time / 20) % 2, 1.5, -1);
 
-        MnogoTravi (480, time);
+        int y = 480;
+        for (int x = 40; x < 450; x += 120)
+            {
+            Trava (x, y, 0 + time / 80 % 2, 1);
+            Trava (1400 - x, y, 0 + time / 80 % 2, 1);
+            Trava (x + 60, y + 80, 0 + time / 80 % 2, 1);
+            Trava (1400 - x - 60, y + 80, 0 + time / 80 % 2, 1);
+            y += 40;
+            }
 
         CatDraw (720 - time * 2, 570 - time / 3, 0.75, 1 + (time / 20 / 3) % 2,
                  0 +((time + 2) / 5 / 3) % 2, 0 + ((time + 1) / 10 / 3) % 2, 0 + (time / 15) % 2,
                  0 + (time / 20) % 2, 0);
+        MadamBokDraw (660 - time * 2, 500 - time / 3, 0, 0, 0 + (time / 20) % 2, 1 - (time / 20) % 2, 1.5, -1);
 
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
 
     for (int time = 0; time < 400; time++)
@@ -379,8 +444,16 @@ void Scena3 ()
         txClear ();
         BackgroundSize ();
 
-        LesopolosaSize (0);
-        RazmetkaDraw (480, 0);
+        for (int x = -1400; x <= 2800; x += 140)
+            {
+            CvetokDraw (-1460 + x * 2,  260,    1, TX_WHITE, TX_ORANGE);
+            DerevoDraw (-1400 + x * 2, -150,  1.5,  1);
+            DerevoDraw (-1520 + x * 2,  -50,    2, -1);
+            CvetokDraw (-1580 + x * 2,  260,    1, TX_WHITE, TX_ORANGE);
+            CvetokDraw (-1660 + x * 2,  200, 1.25, TX_ORANGE, TX_WHITE);
+            }
+
+        RazmetkaDraw (0, 480);
 
         if (time <= 100)
             {
@@ -408,7 +481,7 @@ void Scena3 ()
         if (time > 250)
             {
             BusRDraw (1200 + (time - 250) * 6, 600, 1, TX_DARKGRAY, 0 + ((time / 20) % 4) * 2,
-                      0 + (time / 20) % 4, 0 + ((time - 250) % 15) * 2, 1.5, 0, 0);
+                      0 + (time / 20) % 4, 0 + (time / 3) % 10, 1.5, 0, 0);
             }
 
         txSetColor (TX_MYBROWN, 2);
@@ -416,7 +489,7 @@ void Scena3 ()
         txRectangle (1100, 450, 1400, 510);
         txRectangle (1140, 510, 1400, 700);
 
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
 
     txEnd ();
@@ -439,7 +512,7 @@ void TitlesEnd ()
         txTextOut (300, 850 - time * 5, "Romanovskaia Anna Aleksandrovna");
         txSelectFont ("Arial Black", 130);
         txTextOut (100, 1250 - time * 5, "THANKS FOR ATTENTION!!!");
-        txSleep (SleepTime);
+        txSleep (Sl);
         }
     txEnd ();
     }
