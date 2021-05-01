@@ -23,13 +23,16 @@ const COLORREF TX_PURPLE    = RGB (186,  85, 211),
 
 void Background      ();
 void BackgroundSize  ();
-void BackgroundBeach (int Volny);
 void SolncaSvet      (int time);
 void Obloka          (int time);
-void JuravleiKosyak  (int time);
 void ZadniiPlan      (int time);
+void Lesopolosa      (int time);
+void LesopolosaSize  (int time);
+void BackgroundBeach (int Volny);
 void SemerkaDraw     (int x, int y);
-void RazmetkaDraw    (int time, int y);
+void MnogoTravi      (int y, int time);
+void RazmetkaDraw    (int y, int time);
+void JuravleiKosyak  (int x, int y, int time);
 void BackgroundMore  (int x, int y, int Volny);
 void OstanovkaDraw   (int x, int y, double Size);
 void MisterZadDraw   (int x, int y, double Size);
@@ -108,31 +111,6 @@ void BackgroundSize ()
     txRectangle (0, 640, 1400, 646);
     }
 
-void BackgroundBeach (int Volny)
-    {
-    txSetColor (TX_SEASAND);
-    txSetFillColor (TX_SEASAND);
-    txRectangle (0, 360, 1400, 700);
-
-    txSetColor (TX_SAND, 3);
-    txLine (0, 460, 500, 620);
-    txLine (900, 620, 1400, 460);
-
-    txSetColor (TX_SEAGREEN);
-    txSetFillColor (TX_SEAGREEN);
-    txRectangle (0, 200, 1400, 340);
-
-    for (int x =- 120; x <= 2200; x += 440)
-        {
-        txEllipse (x,       240, x + 280, 400 + Volny);
-        txEllipse (x + 240, 280, x + 480, 360 + Volny);
-        }
-
-    txSetColor (TX_MYBLUE);
-    txSetFillColor (TX_MYBLUE);
-    txRectangle (0, 0, 1400, 200);
-    }
-
 void SolncaSvet (int time)
     {
     if ((time / 40) % 2 < 1)
@@ -162,30 +140,59 @@ void Obloka (int time)
     OblakoDraw (1700 - time / 2,  50, 1.25, 1.25);
     }
 
-void JuravleiKosyak (int time)
-    {
-    for (int y = 50; y <= 250  ; y += 40)
-        {
-        if (y <= 130)
-            {
-            JuravlDraw (300 + time*2, y, 1, 0 + (time / 20) % 2);
-            }
-        if (130 < y && y <= 210)
-            {
-            JuravlDraw (360 + time*2, y-100, 1, 0 + (time / 20) % 2);
-            }
-        if (250 <= y)
-            {
-            JuravlDraw (420 + time*2, y-160, 1, 0 + (time / 20) % 2);
-            }
-        }
-    }
-
 void ZadniiPlan (int time)
     {
     SolncaSvet (time);
     Obloka (time);
-    JuravleiKosyak (time);
+    }
+
+void Lesopolosa (int time)
+    {
+    for (int x = -1400; x <= 2800; x += 240)
+        {
+        CvetokDraw (x -  60 + time, 260,    1, TX_WHITE, TX_ORANGE);
+        DerevoDraw (x       + time, 120, 1.25,  1);
+        DerevoDraw (x - 120 + time, 170,  1.5, -1);
+        CvetokDraw (x - 180 + time, 290,    1, TX_WHITE, TX_ORANGE);
+        CvetokDraw (x -  20 + time, 335, 1.25, TX_ORANGE, TX_WHITE);
+        }
+    }
+
+void LesopolosaSize (int time)
+    {
+    for (int x = -1400; x <= 2800; x += 240)
+        {
+        CvetokDraw (x - 70 + time,  260,    1, TX_WHITE, TX_ORANGE);
+        DerevoDraw (x       + time, -150,  1.5,  1);
+        DerevoDraw (x - 120 + time,  -50,    2, -1);
+        CvetokDraw (x - 170 + time,  260,    1, TX_WHITE, TX_ORANGE);
+        CvetokDraw (x + time,  200, 1.25, TX_ORANGE, TX_WHITE);
+        }
+    }
+
+void BackgroundBeach (int Volny)
+    {
+    txSetColor (TX_SEASAND);
+    txSetFillColor (TX_SEASAND);
+    txRectangle (0, 360, 1400, 700);
+
+    txSetColor (TX_SAND, 3);
+    txLine (0, 460, 500, 620);
+    txLine (900, 620, 1400, 460);
+
+    txSetColor (TX_SEAGREEN);
+    txSetFillColor (TX_SEAGREEN);
+    txRectangle (0, 200, 1400, 340);
+
+    for (int x =- 120; x <= 2200; x += 440)
+        {
+        txEllipse (x,       240, x + 280, 400 + Volny);
+        txEllipse (x + 240, 280, x + 480, 360 + Volny);
+        }
+
+    txSetColor (TX_MYBLUE);
+    txSetFillColor (TX_MYBLUE);
+    txRectangle (0, 0, 1400, 200);
     }
 
 void SemerkaDraw (int x, int y)
@@ -237,15 +244,45 @@ void SemerkaDraw (int x, int y)
     txRectangle (x + 330, y - 45, x + 340, y - 40);
     }
 
-void RazmetkaDraw (int time, int y)
+void MnogoTravi (int y, int time)
     {
-    for (int x =- 1400; x <= 2800; x += 120)
+    for (int x = 40; x < 450; x += 120)
+        {
+        Trava (x, y, 0 + time / 80 % 2, 1);
+        Trava (1400 - x, y, 0 + time / 80 % 2, 1);
+        Trava (x + 60, y + 80, 0 + time / 80 % 2, 1);
+        Trava (1400 - x - 60, y + 80, 0 + time / 80 % 2, 1);
+        y += 40;
+        }
+    }
+
+void RazmetkaDraw (int y, int time)
+    {
+    for (int x = -1400; x <= 2800; x += 120)
         {
         txSetColor (TX_WHITE);
         txSetFillColor (TX_WHITE);
         POINT razmetka[4] = {{x + time,       y     }, {x + 20 + time, y - 15},
                              {x + time + 100, y - 15}, {x + 80 + time, y     }};
         txPolygon (razmetka, 4);
+        }
+    }
+
+void JuravleiKosyak (int x, int y, int time)
+    {
+    for (int i = x; i <= x + 240  ; i += +60)
+        {
+        if (i <= x + 120)
+            {
+            JuravlDraw (i + time*2, y, 1, 0 + (time / 20) % 2);
+            y += 20;
+            }
+        else
+            {
+            y += 20;
+            JuravlDraw (i - 180 + time*2, y, 1, 0 + (time / 20) % 2);
+            y -= 40;
+            }
         }
     }
 
@@ -1030,6 +1067,7 @@ void BusRDraw (int x, int y, int Zajiganie, COLORREF Stop, int Podveska, int Kol
                  x - 305 * Size, y - ( 5 - Podveska) * Size);
 
     txSetColor (TX_DARKGRAY);
+    txSetFillColor (TX_DARKGRAY);
     txEllipse (x -  310                                 * Size, y - (10 -                    Podveska) * Size,
                x - (310 + (10 * Zajiganie) + Glushitel) * Size, y - (10 - ( 5 * Zajiganie) - Podveska) * Size);
     txEllipse (x -  315                                 * Size, y - (15 -                    Podveska) * Size,
