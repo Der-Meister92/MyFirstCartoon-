@@ -97,17 +97,17 @@ void Scena1 ()
 
         if (time <= 100)
             {
-            MoskvichDraw  (1400 - time * 4, 400, -60, 0, 0, (time / 15) % 2, 1);
-            MisterZadDraw (1376 - time * 4, 320, 1);
-            MadamBokDraw  (1309 - time * 4, 300, 0 + (time / 20) % 2, 1 - (time / 20) % 2, 0, 0, 1, 1);
+            MoskvichDraw (1400 - time * 4, 400, -60, 0, 0, (time / 15) % 2, 1);
+            MisterDraw (1376 - time * 4, 320, 0, 2, TX_BROWN, 1, 0, 0, 0, 0, 1);
+            MadamDrawProfil (1309 - time * 4, 300, TX_BLUE, 0 + (time / 20) % 2, 1 - (time / 20) % 2, 0, 0, 1, 1);
             }
 
         if (100 < time && time <= 150)
             {
-            MoskvichDraw  (1400 - time * 4, 400, -60, 0, 0, (time / 15) % 2, 1);
-            MisterBokDraw (1376 - time * 4, 320, 0, 0, 1);
-            MadamBokDraw  (1309 - time * 4, 300, 0, 0, 0, 0, 1, 1);
-            Serdechko     (1342 - time * 4, 310 - (time - 100) * 2, 0.1 + (time - 100) / 20);
+            MoskvichDraw (1400 - time * 4, 400, -60, 0, 0, (time / 15) % 2, 1);
+            MisterDrawProfil (1376 - time * 4, 320, TX_BROWN, 0, 0, 1, 1);
+            MadamDrawProfil (1309 - time * 4, 300, TX_BLUE, 0, 0, 0, 0, 1, 1);
+            Serdechko (1342 - time * 4, 310 - (time - 100) * 2, 0.1 + (time - 100) / 20);
             }
 
         if (150 < time && time <= 200)
@@ -218,13 +218,13 @@ void Scena2 ()
         if (120 < time && time <= 200)
             {
             BusRDraw (1200, 600, 0, TX_MYRED, 0, 0, 0, 1.5, 10, 25);
-            MadamDraw (950, 550, 2, TX_BLUE, 1, 0, 0, 0, 0, 0, 0, 1.1);
+            MadamDraw (950, 550, 1, 1, 2, TX_BLUE, 1, 0, 0, 1, 1, 0, 0, 1.1);
             }
 
         if (time > 200)
             {
             BusRDraw (1200, 600, 0, TX_MYRED, 0, 0, 0, 1.5, 10, 25);
-            MadamDraw (950, 550, 2, TX_BLUE, 1, 0, 0, 0, 0, 1, 1, 1.1);
+            MadamDraw (950, 550, 1, 1, 2, TX_BLUE, 1, 0, 0, 1, 1, 1, 1, 1.1);
             }
 
         txSetColor (TX_MYBROWN, 2);
@@ -252,8 +252,8 @@ void Scena2 ()
             BackgroundMore (720, 400, 40 - (time / 2) % 40);
             }
 
-        Obloka (time);
-        MadamDraw (1100 - time / 2, 180 + time, 2, TX_BLUE, 1, 0, 0, 0 + (time / 20) % 2,
+        Oblaka(time);
+        MadamDraw (1100 - time / 2, 180 + time, 1, 1, 2, TX_BLUE, 1, 0, 0, 0 + (time / 20) % 2,
                    1 - (time / 20) % 2, 1, 1, 1.1 + 0.002 * time);
 
         txSleep (SleepTime);
@@ -288,12 +288,12 @@ void Scena2 ()
 
         if (time <= 340)
             {
-            MadamBokDraw (1340 - time * 2, 300 + time / 2, 0, 0, 0 + (time / 20) % 2, 1 - (time / 20) % 2, 1.5, -1);
+            MadamDrawProfil (1340 - time * 2, 300 + time / 2, TX_BLUE, 0, 0, 0 + (time / 20) % 2, 1 - (time / 20) % 2, 1.5, -1);
             }
 
         if (340 < time && time <= 1100)
             {
-            MadamZadDraw (660, 500, 0, 0, 0, 0, 1.5);
+            MadamDraw (660, 500, 0, 0, 2, TX_BLUE, 1, 0, 0, 0, 0, 0, 1, 1.5);
             }
 
         MnogoTravi (480, time);
@@ -362,10 +362,9 @@ void Scena3 ()
         ZadniiPlan (time);
 
         Rybak (200, 210, 0 + (time / 100) % 2, 1);
-        MadamBokDraw (660 - time * 2, 500 - time / 3, 0, 0, 0 + (time / 20) % 2, 1 - (time / 20) % 2, 1.5, -1);
-
         MnogoTravi (480, time);
 
+        MadamDrawProfil (660 - time * 2, 500 - time / 3, TX_BLUE, 0, 0, 0 + (time / 20) % 2, 1 - (time / 20) % 2, 1.5, -1);
         CatDraw (720 - time * 2, 570 - time / 3, 0.75, 1 + (time / 20 / 3) % 2,
                  0 +((time + 2) / 5 / 3) % 2, 0 + ((time + 1) / 10 / 3) % 2, 0 + (time / 15) % 2,
                  0 + (time / 20) % 2, 0);
@@ -385,7 +384,7 @@ void Scena3 ()
         if (time <= 100)
             {
             BusRDraw (1200, 600, 0, TX_MYRED, 0, 0, 0, 1.5, 10, 25);
-            MadamZadDraw (950, 550, 0, 0, 1, 1, 1.1);
+            MadamDraw (950, 550, 0, 1, 2, TX_BLUE, 1, 0, 0, 1, 1, 0, 0, 1.1);
             CatZadDraw (1000, 620, 0.7, 1 + (time / 20 / 3) % 2, 0 +((time + 2) / 5 / 3) % 2,
                         0 + ((time + 1) / 10 / 3) % 2, 0 + (time / 15) % 2);
             }
