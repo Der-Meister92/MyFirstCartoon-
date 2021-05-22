@@ -9,7 +9,7 @@
 //}===================================================================
 
 #include "TXLib.h"
-#include "DerMeisterLib.h"
+#include "SDK_DerMeister/DerMeisterLib.h"
 
 const int SleepTime = 1;
 
