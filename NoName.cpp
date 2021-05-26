@@ -81,7 +81,7 @@ void Scena1 ()
 
         BusLDraw (1400 - time * 6, 450, 1, TX_DARKGRAY, 0 + ((time / 20) % 4) * 2,
                   0 + (time / 20) % 4, 0 + (time % 15) * 2, 1.25);
-        SemerkaDraw (-1000 + time * 20, 570, 1);
+        SemerkaDraw (-1000 + time * 20, 570, 1.25);
 
         txSleep (SleepTime);
         }
