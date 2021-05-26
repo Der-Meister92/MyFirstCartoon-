@@ -47,7 +47,7 @@ void ZadniiPlan       (int time);
 void Lesopolosa       (int time);
 void LesopolosaSize   (int time);
 void BackgroundBeach  (int Volny);
-void SemerkaDraw      (int x, int y);
+void SemerkaDraw      (int x, int y, double Size);
 void MnogoTravi       (int y, int time);
 void RazmetkaDraw     (int y, int time);
 void JuravleiKosyak   (int x, int y, int time);
@@ -379,6 +379,7 @@ void BackgroundBeach (int Volny)
 //!
 //! @param x        x-координата машины
 //! @param y        y-координата машины
+//! @param Size     Размер автомобиля
 //!
 //! @par            Пример использования:
 //!
@@ -387,53 +388,76 @@ void BackgroundBeach (int Volny)
 //! @endcode
 //}------------------------------------------------------------------------------------------------------
 
-void SemerkaDraw (int x, int y)
+void SemerkaDraw (int x, int y, double Size)
     {
     txSetColor (TX_CHERRY);
     txSetFillColor (TX_CHERRY);
-    POINT kuzov[16] = {{x,       y      }, {x -  10, y - 60}, {x +  60, y - 60}, {x + 100, y - 120},
-                       {x + 240, y - 120}, {x + 280, y - 60}, {x + 360, y - 60}, {x + 350, y      },
-                       {x + 330, y      }, {x + 310, y - 20}, {x + 290, y - 20}, {x + 270, y      },
-                       {x +  90, y      }, {x +  70, y - 20}, {x +  50, y - 20}, {x +  30, y      }};
+    POINT kuzov[16] = {{       x              ,        y              },
+                       {ROUND (x -  10 * Size), ROUND (y -  60 * Size)},
+                       {ROUND (x +  60 * Size), ROUND (y -  60 * Size)},
+                       {ROUND (x + 100 * Size), ROUND (y - 120 * Size)},
+                       {ROUND (x + 240 * Size), ROUND (y - 120 * Size)},
+                       {ROUND (x + 280 * Size), ROUND (y -  60 * Size)},
+                       {ROUND (x + 360 * Size), ROUND (y -  60 * Size)},
+                       {ROUND (x + 350 * Size),        y              },
+                       {ROUND (x + 330 * Size),        y              },
+                       {ROUND (x + 310 * Size), ROUND (y -  20 * Size)},
+                       {ROUND (x + 290 * Size), ROUND (y -  20 * Size)},
+                       {ROUND (x + 270 * Size),        y              },
+                       {ROUND (x +  90 * Size),        y              },
+                       {ROUND (x +  70 * Size), ROUND (y -  20 * Size)},
+                       {ROUND (x +  50 * Size), ROUND (y -  20 * Size)},
+                       {ROUND (x +  30 * Size),        y              }};
     txPolygon (kuzov, 16);
 
     txSetColor     (TX_BLACK);
     txSetFillColor (TX_TRANSPARENT);
-    POINT dveri[10] = {{x + 170, y - 110}, {x + 170, y -  10},
-                       {x + 100, y -  10}, {x +  70, y -  40},
-                       {x +  70, y -  60}, {x + 100, y - 110},
-                       {x + 240, y - 110}, {x + 270, y -  60},
-                       {x + 270, y -  10}, {x + 170, y -  10}};
+    POINT dveri[10] = {{ROUND (x + 170 * Size), ROUND (y - 110 * Size)},
+                       {ROUND (x + 170 * Size), ROUND (y -  10 * Size)},
+                       {ROUND (x + 100 * Size), ROUND (y -  10 * Size)},
+                       {ROUND (x +  70 * Size), ROUND (y -  40 * Size)},
+                       {ROUND (x +  70 * Size), ROUND (y -  60 * Size)},
+                       {ROUND (x + 100 * Size), ROUND (y - 110 * Size)},
+                       {ROUND (x + 240 * Size), ROUND (y - 110 * Size)},
+                       {ROUND (x + 270 * Size), ROUND (y -  60 * Size)},
+                       {ROUND (x + 270 * Size), ROUND (y -  10 * Size)},
+                       {ROUND (x + 170 * Size), ROUND (y -  10 * Size)}};
     txPolygon (dveri, 10);
 
-    txRectangle (x + 30, y - 50, x + 50, y - 33);
+    txRectangle (x + 30 * Size, y - 50 * Size, x + 50 * Size, y - 33 * Size);
 
     txSetColor     (TX_BLACK);
     txSetFillColor (TX_BLACK);
-    POINT okno1[6] = {{x + 102, y - 60}, {x + 102, y - 105}, {x + 165, y - 105},
-                      {x + 165, y - 60}, {x +  75, y -  60}, {x + 102, y - 105}};
+    POINT okno1[6] = {{ROUND (x + 102 * Size), ROUND (y -  60 * Size)},
+                      {ROUND (x + 102 * Size), ROUND (y - 105 * Size)},
+                      {ROUND (x + 165 * Size), ROUND (y - 105 * Size)},
+                      {ROUND (x + 165 * Size), ROUND (y -  60 * Size)},
+                      {ROUND (x +  75 * Size), ROUND (y -  60 * Size)},
+                      {ROUND (x + 102 * Size), ROUND (y - 105 * Size)}};
     txPolygon (okno1, 6);
-    POINT okno2[4] = {{x + 175, y -  60}, {x + 265, y -  60},
-                      {x + 238, y - 105}, {x + 175, y - 105}};
+    POINT okno2[4] = {{ROUND (x + 175 * Size), ROUND (y -  60 * Size)},
+                      {ROUND (x + 265 * Size), ROUND (y -  60 * Size)},
+                      {ROUND (x + 238 * Size), ROUND (y - 105 * Size)},
+                      {ROUND (x + 175 * Size), ROUND (y - 105 * Size)}};
     txPolygon (okno2, 4);
 
     txSetFillColor (TX_BLACK);
-    txRectangle (x +  80, y - 55, x + 100, y - 47);
-    txRectangle (x + 180, y - 55, x + 200, y - 47);
+    txRectangle (x +  80 * Size, y - 55 * Size, x + 100 * Size, y - 47 * Size);
+    txRectangle (x + 180 * Size, y - 55 * Size, x + 200 * Size, y - 47 * Size);
 
-    txCircle (x +  60, y + 8, 25);
-    txCircle (x + 300, y + 8, 25);
+    txCircle (x +  60 * Size, y + 8 * Size, 25 * Size);
+    txCircle (x + 300 * Size, y + 8 * Size, 25 * Size);
     txSetFillColor (TX_WHITE);
-    txCircle (x +  60, y + 8, 17);
-    txCircle (x + 300, y + 8, 17);
+    txCircle (x +  60 * Size, y + 8 * Size, 17 * Size);
+    txCircle (x + 300 * Size, y + 8 * Size, 17 * Size);
 
     txSetFillColor (TX_BLACK);
-    txRectangle (x -  10, y - 20, x +  10, y - 10);
-    txRectangle (x + 345, y - 20, x + 365, y - 10);
+    txRectangle (x -  10 * Size, y - 20 * Size, x +  10 * Size, y - 10 * Size);
+    txRectangle (x + 345 * Size, y - 20 * Size, x + 365 * Size, y - 10 * Size);
 
     txSetColor     (TX_ORANGE);
     txSetFillColor (TX_ORANGE);
-    txRectangle (x + 330, y - 45, x + 340, y - 40);
+    txRectangle (x + 330 * Size, y - 45 * Size, x + 340 * Size, y - 40 * Size);
     }
 
 //{------------------------------------------------------------------------------------------------------
